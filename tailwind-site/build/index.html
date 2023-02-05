@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body class="min-h-screen bg-slate-50 dark:bg-black dark:text-white">
-    <header class="bg-teal-700 text-white sticky top-0 z-0">
+    <header class="bg-teal-700 text-white sticky top-0 z-10">
       <section class="max-w-4xl mx-auto p-4 flex justify-between items-center">
         <h1 class="text-3xl font-medium">
           <a href="#hero">🚀 Acme Rockets</a>
@@ -34,7 +34,7 @@
     <main class="max-w-4xl mx-auto">
       <section
         id="hero"
-        class="flex flex-col-reverse justify-center sm:flex-row p-6 items-center gap-8 mb-12 scroll-mt-40"
+        class="widescreen:section-min-h tallscreen:section-min-h flex flex-col-reverse justify-center sm:flex-row p-6 items-center gap-8 mb-12 scroll-mt-40"
       >
         <article class="sm:w-1/2">
           <h3
@@ -62,7 +62,10 @@
         <img src="img/rocketdab.png" alt="Rocket Dab" class="w-1/2" />
       </section>
       <hr class="mx-auto bg-black dark:bg-white w-1/2" />
-      <section id="rockets" class="p-6 my-12 scroll-mt-20">
+      <section
+        id="rockets"
+        class="p-6 my-12 scroll-mt-20 widescreen:section-min-h tallscreen:section-min-h"
+      >
         <h2
           class="text-4xl font-bold text-center sm:text-5xl mb-6 text-slate-900 dark:text-white"
         >
@@ -128,21 +131,138 @@
         </ul>
       </section>
       <hr class="mx-auto bg-black dark:bg-white w-1/2" />
-      <section id="testimonials" class="p-6 my-12">
+      <section
+        id="testimonials"
+        class="p-6 my-12 scroll-mt-20 widescreen:section-min-h tallscreen:section-min-h"
+      >
         <h2
           class="text-4xl font-bold text-center sm:text-5xl mb-6 text-slate-900 dark:text-white"
         >
           Testimonials
         </h2>
+        <figure class="my-12">
+          <blockquote
+            class="bg-teal-600 dark:bg-black pl-14 pr-8 py-12 rounded-3xl relative"
+          >
+            <p
+              class="text-2xl sm:text-3xl text-left mt-2 text-white dark:text-slate-400 before:content-['\201C'] before:absolute before:top-0 before:left-0 before:text-9xl before:text-white before:opacity-25 before:translate-x-2 before:translate-y-2 after:content-['\201D'] after:absolute after:bottom-0 after:right-0 after:text-9xl after:text-white after:opacity-25 after:-translate-x-2 after:-translate-y-2"
+            >
+              Acme has always been there for me. Their Explorer rockets arrived
+              in a wooden carte as expected. I was able to assemble it in a few
+              hours. I was able to launch it in my backyard and it flew like a
+              dream.
+            </p>
+            <!-- /* Add classes for fig caption for blockquote -->
+          </blockquote>
+          <figcaption
+            class="italic text-xl sm:text-2xl text-right mt-2 text-slate-500 dark:text-slate-400"
+          >
+            &#8212; Whiley Simonds, Genius
+          </figcaption>
+        </figure>
+        <figure class="my-12">
+          <blockquote
+            class="bg-teal-600 dark:bg-black pl-14 pr-8 py-12 rounded-3xl relative"
+          >
+            <p
+              class="text-2xl sm:text-3xl text-left mt-2 text-white dark:text-slate-400 before:content-['\201C'] before:absolute before:top-0 before:left-0 before:text-9xl before:text-white before:opacity-25 before:translate-x-2 before:translate-y-2 after:content-['\201D'] after:absolute after:bottom-0 after:right-0 after:text-9xl after:text-white after:opacity-25 after:-translate-x-2 after:-translate-y-2"
+            >
+              Acme has always been there for me. Their Explorer rockets arrived
+              in a wooden carte as expected. I was able to assemble it in a few
+              hours. I was able to launch it in my backyard and it flew like a
+              dream.
+            </p>
+            <!-- /* Add classes for fig caption for blockquote -->
+          </blockquote>
+          <figcaption
+            class="italic text-xl sm:text-2xl text-right mt-2 text-slate-500 dark:text-slate-400"
+          >
+            &#8212; Whiley Simonds, Genius
+          </figcaption>
+        </figure>
+        <figure class="my-12">
+          <blockquote
+            class="bg-teal-600 dark:bg-black pl-14 pr-8 py-12 rounded-3xl relative"
+          >
+            <p
+              class="text-2xl sm:text-3xl text-left mt-2 text-white dark:text-slate-400 before:content-['\201C'] before:absolute before:top-0 before:left-0 before:text-9xl before:text-white before:opacity-25 before:translate-x-2 before:translate-y-2 after:content-['\201D'] after:absolute after:bottom-0 after:right-0 after:text-9xl after:text-white after:opacity-25 after:-translate-x-2 after:-translate-y-2"
+            >
+              Acme has always been there for me. Their Explorer rockets arrived
+              in a wooden carte as expected. I was able to assemble it in a few
+              hours. I was able to launch it in my backyard and it flew like a
+              dream.
+            </p>
+            <!-- /* Add classes for fig caption for blockquote -->
+          </blockquote>
+          <figcaption
+            class="italic text-xl sm:text-2xl text-right mt-2 text-slate-500 dark:text-slate-400"
+          >
+            &#8212; Whiley Simonds, Genius
+          </figcaption>
+        </figure>
       </section>
       <hr class="mx-auto bg-black dark:bg-white w-1/2" />
-      <section id="contact" class="p-6 my-12">
+      <section
+        id="contact"
+        class="p-6 my-12 scroll-mt-16 widescreen:section-min-h tallscreen:section-min-h"
+      >
         <h2
           class="text-4xl font-bold text-center sm:text-5xl mb-6 text-slate-900 dark:text-white"
         >
           Contact
         </h2>
+        <form
+          action=""
+          class="flex-col flex items-left gap-4 max-w-4xl mx-auto text-2xl sm:text-3xl"
+        >
+          <label for="subject">Subject:</label>
+          <input
+            type="text"
+            id="subject"
+            name="subject"
+            required
+            minlength="3"
+            maxlength="60"
+            placeholder="Your Subject"
+            class="w-full text-black text-2xl sm:text-3xl p-3 rounded-xl border border-solid border-slate-900 dark:border-none"
+          />
+          <label for="subject">Message:</label>
+          <textarea
+            type="text"
+            id="message"
+            name="message"
+            required
+            cols="30"
+            rows="10"
+            placeholder="Your Message"
+            class="w-full text-black text-2xl sm:text-3xl p-3 rounded-xl border border-solid border-slate-900 dark:border-none"
+          ></textarea>
+        </form>
       </section>
     </main>
+    <footer class="bg-teal-700 text-white text-l">
+      <section
+        class="max-w-4xl mx-auto p-4 flex flex-col sm:flex-row sm:justify-between"
+      >
+        <address>
+          <h2>Acme Rocket-Powered Products, Inc.</h2>
+          555 Astro Way<br />
+          Fairfield, New Jersey 12345-5555<br />
+          Email:
+          <a href="mailto:inquiries@acmerockets.com">Inquires@AcmeRockets.com</a
+          ><br />
+          Phone: <a href="tel:+15555555555">(555) 555-5555</a>
+        </address>
+        <nav class="hidden md:flex flex-col gap-2" aria-label="footer">
+          <a href="#rockets" class="hover:opacity-90">Our Rockets</a>
+          <a href="#testimonials" class="hover:opacity-90">Testimonials</a>
+          <a href="#contact" class="hover:opacity-90">Contact Us</a>
+        </nav>
+        <div class="flex flex-col sm:gap-2">
+          <p class="text-right">Copyright &copy; <span id="year">2022</span></p>
+          <p class="text-right">All Rights Reserved</p>
+        </div>
+      </section>
+    </footer>
   </body>
 </html>
