@@ -18,7 +18,7 @@ const Search = ({
 }) => {
   const [activeSuggestion, setActiveSuggestion] = useState("");
 
-  const onChange = (e) => {
+  const onChange = (e: { currentTarget: { value: any } }) => {
     const searchQuery = e.currentTarget.value;
     setSearchQuery(searchQuery);
 
@@ -31,7 +31,7 @@ const Search = ({
   };
 
   //TODO: Add support for autocomplete on keydown
-  const onKeyDown = (e) => {
+  const onKeyDown = (e: { keyCode: number }) => {
     if (e.keyCode === 13) {
       setSearchQuery(activeSuggestion);
     }
