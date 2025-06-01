@@ -1,0 +1,61 @@
+import React from 'react';
+import { render } from "@testing-library/react";
+import { IncomingMessage, ServerResponse } from 'http';
+import Error from '../pages/_error';
+
+describe("error", () => {
+
+    const initialProps = {
+        res: new ServerResponse({} as IncomingMessage),
+        err: { statusCode: 404, name: "Error", message: 'Not Found' },
+        pathname: undefined,
+        query: undefined,
+        AppTree: undefined
+    }
+
+    it('should render the Error component properly', () => {
+        const { getByRole } = render(<Error statusCode={400} />);
+        expect(getByRole).toBeTruthy();
+    });
+
+    it('should render the Error with initial props passed in', async () => {
+        await Error.getInitialProps(initialProps)
+        expect(initialProps).toBeDefined();
+        expect(initialProps.err.message).toEqual("Not Found");
+    });
+
+    it('Should return an error message when an error is present', async () => {
+        const erroneousInitialProps = {
+            res: null,
+            err: null,
+            pathname: undefined,
+            query: undefined,
+            AppTree: undefined
+        };
+
+        await Error.getInitialProps(erroneousInitialProps);
+        const updatedError = await Error.getInitialProps(erroneousInitialProps);
+        expect(updatedError.statusCode).toEqual(404);
+    });
+
+    it('Should return an erroneous status code when no response is provided', async () => {
+        const erroneousInitialProps = {
+            res: null,
+            err: { statusCode: 404, name: "Error", message: 'Not Found' },
+            pathname: undefined,
+            query: undefined,
+            AppTree: undefined
+        }
+        const { getByText } = render(<Error statusCode={null} />);
+        const errorMessage = getByText(/An error occurred on client/i);
+        await Error.getInitialProps(erroneousInitialProps);
+
+        expect(erroneousInitialProps.err.statusCode).toEqual(404);
+        expect(errorMessage).toBeTruthy();
+      
+        const updatedError = await Error.getInitialProps(erroneousInitialProps)
+        expect(updatedError.statusCode).toEqual(404);
+
+    });
+
+});

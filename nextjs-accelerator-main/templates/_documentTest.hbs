@@ -1,0 +1,123 @@
+import React from 'react';
+import { render } from "@testing-library/react";
+import Document from '../pages/_document';
+import NextDocument from "next/document";
+import * as nextJsMfUtils from '@module-federation/nextjs-mf/utils';
+
+describe("document", () => {
+
+  class ErrorBoundary extends React.Component {
+    constructor(props) {
+      super(props)
+      this.state = { hasError: false }
+    };
+
+    static getDerivedStateFromError(error) {
+      return { hasError: true };
+    };
+
+    componentDidCatch(error, info) {
+      console.log(error)
+      console.log(info.componentStack)
+    };
+
+    render() {
+      if (this.state.hasError) {
+        return this.props.fallback;
+      }
+      return this.props.children;
+    }
+  };
+
+  const setEnv = (value) => {
+    Object.defineProperty(process.env, 'NODE_ENV', {
+      value: value,
+      writable: true,
+    })
+  };
+
+  beforeEach(() => {
+    setEnv('development')
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('should successfully render the Document', () => {
+    const { container } = render(
+      <ErrorBoundary>
+        <Document fallback={"An error has occurred"} />
+      </ErrorBoundary>
+    );
+    expect(container).toBeTruthy()
+  });
+
+
+  it('should call revalidate after receiving partially incorrect props', async () => {
+    const ctx = {
+      req: { url: 'http://_err' },
+      res: {
+        writeHead: jest.fn(),
+        end: jest.fn(),
+        on: jest.fn(),
+        query: {},
+        pathname: '',
+        AppTree: null
+      }
+    };
+
+    jest.spyOn(nextJsMfUtils, 'revalidate').mockResolvedValue(true)
+    NextDocument.getInitialProps = jest.fn().mockResolvedValue({})
+    await Document.getInitialProps(ctx)
+
+    expect(nextJsMfUtils.revalidate).toHaveBeenCalled();
+  });
+
+
+  it('should return a response containing finish if all parameters are correct', async () => {
+    const context = {
+      req: { url: 'http://_next' },
+      res: {
+        writeHead: jest.fn(),
+        end: jest.fn(),
+        on: jest.fn((event, revalidateCallBack) => {
+          if (event === "finish") return revalidateCallBack()
+        }),
+        query: {},
+        pathname: '',
+        AppTree: null
+      }
+    };
+
+    jest.spyOn(nextJsMfUtils, 'revalidate').mockResolvedValue(true)
+    NextDocument.getInitialProps = jest.fn().mockResolvedValue({})
+    await Document.getInitialProps(context)
+
+    expect(nextJsMfUtils.revalidate).toHaveBeenCalled();
+  });
+
+  it('should test the other branch of the if statement', async () => {
+    const ctx = {
+      req: { url: 'http://err' },
+      res: {
+        writeHead: jest.fn(),
+        end: jest.fn(),
+        on: jest.fn(),
+        query: {},
+        pathname: '',
+        AppTree: null
+      }
+    };
+
+    jest.spyOn(nextJsMfUtils, 'revalidate').mockResolvedValue(true);
+    jest.spyOn(nextJsMfUtils, 'revalidate').mockResolvedValue(false);
+
+    await Document.getInitialProps(ctx);
+
+    expect(ctx.res.writeHead).not.toHaveBeenCalled();
+    expect(ctx.res.end).not.toHaveBeenCalled();
+
+  });
+
+});

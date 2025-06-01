@@ -1,0 +1,35 @@
+import { renderHook, act } from "@testing-library/react";
+import useCounterStore from './counterStore';
+
+describe('Testing the counter store hook functionality', () => {
+
+    it('should test the store hook increment function', () => {
+        const { result } = renderHook(() => useCounterStore());
+        const { increment } = result.current;
+
+        act(() => {
+            increment();
+        });
+
+        expect(result.current.count).toEqual(1);
+    });
+
+    it('should test the store hook decrement function', () => {
+        const { result } = renderHook(() => useCounterStore());
+        const { increment } = result.current;
+        const { decrement } = result.current;
+
+        act(() => {
+            increment();
+            increment();
+            increment();
+            decrement();
+        });
+
+        act(() => {
+            decrement();
+        });
+
+        expect(result.current.count).toEqual(2);
+    });
+})

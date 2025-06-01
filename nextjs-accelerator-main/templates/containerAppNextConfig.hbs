@@ -1,0 +1,45 @@
+
+const NextFederationPlugin = require("@module-federation/nextjs-mf");
+
+const remoteNextUrl = process.env.REMOTE_NEXT_URL || `http://localhost:{{microAppPort}}`;
+
+ {{!-- this enables you to use import() and the webpack parser
+ loading remotes on demand, not ideal for SSR --}}
+const remotes = (isServer) => {
+  const location = isServer ? "ssr" : "chunks";
+  return {
+    {{formatString microAppName}}: `{{microAppName}}@http://localhost:{{microAppPort}}/_next/static/${location}/remoteEntry.js`,
+  
+    {{#if microAppNames}}
+    {{#each (split microAppNames ',')}}
+    {{formatString this}}: `{{this}}@http://localhost:{{calculatePort @index ../containerPort}}/_next/static/${location}/remoteEntry.js`,
+    {{/each}}
+    {{/if}}
+    /* PLOP_INJECT_NEWMICROAPP_CONFIG */
+  };
+};
+
+module.exports = {
+  reactStrictMode: true,
+  webpack(config, options) {
+    config.plugins.push(
+      new NextFederationPlugin({
+        name: "{{appName}}",
+        filename: "static/chunks/remoteEntry.js",
+        exposes: {},
+        remotes: remotes(options.isServer),
+        shared: { 
+          'next/image': {
+            eager: false,
+            requiredVersion: false,
+            singleton: false,
+            import: undefined,
+        }
+        },
+      })
+    );
+
+    return config;
+  },
+};
+

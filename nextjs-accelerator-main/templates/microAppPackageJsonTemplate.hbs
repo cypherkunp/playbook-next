@@ -1,0 +1,30 @@
+{
+  "name": "{{appNameWS}}",
+  "version": "1.0.0",
+  "private": true,
+  "sideEffects": false,
+  "scripts": {
+    "dev": "next dev --port {{port}}",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "14.1.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "ui": "*",
+    "zustand": "4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "17.0.12",
+    "@types/react": "18.0.22",
+    "@types/react-dom": "18.0.7",
+    "eslint-config-custom": "*",
+    "tsconfig": "*",
+    "webpack": "5.80.0",
+    "@module-federation/nextjs-mf": "8.1.10",
+    "@module-federation/typescript": "2.4.2",
+    "typescript": "5.1.6"
+  }
+}

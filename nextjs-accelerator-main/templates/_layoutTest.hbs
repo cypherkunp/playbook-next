@@ -1,0 +1,14 @@
+import React from "react";
+import { render } from "@testing-library/react";
+import {{updatedAppName}} from '../pages/layout';
+
+describe("Testing the Layout component", () => {
+
+    it("should render the component successfully", () => {
+
+        const { getByRole } = render(<{{updatedAppName}} />)
+
+        expect(getByRole).toBeTruthy()
+    })
+
+})

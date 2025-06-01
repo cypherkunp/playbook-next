@@ -1,0 +1,41 @@
+
+const NextFederationPlugin = require("@module-federation/nextjs-mf");
+
+const remotes = (isServer) => {
+  const location = isServer ? "ssr" : "chunks";
+  return {
+    {{formatString firstMicroApp}}: `{{firstMicroApp}}@http://localhost:{{firstMicroAppPort}}/_next/static/${location}/remoteEntry.js`,
+  };
+};
+
+module.exports = {
+  reactStrictMode: true,
+  // transpilePackages: ["ui"],
+  webpack(config, options) {
+    config.plugins.push(
+      new NextFederationPlugin({
+        name: "{{applicationName}}",
+        filename: "static/chunks/remoteEntry.js",
+        exposes: {
+          "./page": "./src/pages/index.tsx",
+           {{#if mapStore}}
+          './counterStore': './src/store/counterStore',
+           {{/if}}
+        },
+         remotes: remotes(options.isServer),
+        shared: {
+          'next/image': {
+            eager: false,
+            requiredVersion: false,
+            singleton: false,
+            import: undefined,
+        },
+        }
+       
+      })
+    );
+
+    return config;
+  },
+};
+

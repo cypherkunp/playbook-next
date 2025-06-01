@@ -1,0 +1,35 @@
+// Container App Template
+import dynamic from 'next/dynamic';
+import Link from 'next/link'
+import React,{ useEffect } from "react";
+import  useCounterStore from '{{formatString microAppName}}/counterStore';
+
+export default function {{formatString appName}}() {
+  const counterStore = useCounterStore();
+ // @ts-ignore
+  useEffect(() => { // @ts-ignore
+     // @ts-ignore
+  }, [counterStore?.count || 0 ]);
+  return (
+ <>
+     <div className="appbar">
+         <p className="item"><b>GenesisX Microfrontend</b></p>
+        <p className="item"><b>Counter: {counterStore?.count ? counterStore?.count : 0}</b> </p>
+     </div>
+     <nav>{{appName}} |  <Link href="/{{microAppName}}">{{microAppName}}</Link> |
+     {{#if microAppNames}}
+            {{#each (split microAppNames ',')}}
+            &nbsp;<Link href="/{{this}}">{{this}}</Link>&nbsp; |
+            {{/each}}
+      {{/if}}
+{/* INSERT_DEFAULT_LINK_WHEN_ADD_MICRO_APP */}
+
+     
+     </nav>
+     <div className="container">
+      Welcome to GenesisX Microfrontend
+     </div>
+     
+      </>
+  );
+}

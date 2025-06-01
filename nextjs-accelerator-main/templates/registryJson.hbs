@@ -1,0 +1,27 @@
+{
+    "workspace": "{{workspaceName}}",
+    "nextport": {{#if microAppNames}}{{calculateNextPort microAppNames remotePortNumber}}{{else}}{{defaultNextPort remotePortNumber}}{{/if}},
+    "apps":[
+        {
+            "name": "{{appName}}",
+            "port": {{containerPortNumber}},
+            "type": "host-app"
+        },
+        {
+            "name": "{{microAppName}}",
+            "port": {{remotePortNumber}},
+            "type": "remote-app"
+        }{{#if microAppNames}},{{/if}}
+    {{#if microAppNames}}
+    {{#each (split microAppNames ',') as |microAppName| }}
+        {
+            "name": "{{microAppName}}",
+            "port": {{portCounter @index ../remotePortNumber}},
+            "type": "micro-app",
+            "micro-app-number": {{microNameCounter @index}}
+        }{{#unless @last}},{{/unless}}
+        {{/each}}
+
+    {{/if}}
+    ]
+}

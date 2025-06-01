@@ -1,0 +1,39 @@
+// Micro App Template
+import React from 'react';
+import Link from 'next/link'
+{{#if isAdditional}}
+import  useCounterStore from '{{formatString firstMicroApp}}/counterStore';
+{{/if}}
+{{#unless isAdditional}}
+import  useCounterStore from '../store/counterStore';
+{{/unless}}
+import { useEffect } from "react";
+
+export default function {{formatString name}}() {
+  const counterStore:any = useCounterStore();
+ // @ts-ignore
+  useEffect(() => { // @ts-ignore
+    console.log('Count in host app:', counterStore?.count);
+     // @ts-ignore
+  }, [counterStore?.count || 0 ]);
+  return (
+<>
+<div className="appbar">
+        <p className="item"><b>GenesisX Microfrontend</b></p>
+        <p className="item"><b>Counter: {counterStore?.count ? counterStore?.count : 0}</b> </p>
+     </div>
+     <nav><Link href='/'>{{appNameWS}}</Link> |  <Link href="/{{firstMicroApp}}">{{firstMicroApp}}</Link> |
+     {{#if microAppNames}}
+            {{#each (split microAppNames ',')}}
+            &nbsp;<Link href="/{{this}}">{{this}}</Link>&nbsp; |
+            {{/each}}
+      {{/if}}
+  {/* INSERT_DEFAULT_LINK_WHEN_ADD_MICRO_APP */}
+     </nav>
+     <div className="microapp-container">
+      <div><strong>{{name}} Loaded</strong></div>
+      <div><button onClick={counterStore?.increment}>Increment Counter</button></div>
+     </div>
+</>
+  );
+}

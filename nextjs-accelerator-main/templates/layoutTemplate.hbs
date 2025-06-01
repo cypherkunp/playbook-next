@@ -1,0 +1,19 @@
+import * as React from "react";
+import type { NextPage } from "next";
+import Head from "next/head";
+
+const {{formatString appNameWS}}: NextPage = () => {
+  return (
+    <React.Fragment>
+      <Head>
+        <title>{{appNameWS}}</title>
+        <meta name="description" content="Home Page" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <h2>{{microAppName}}</h2>
+      <p>This is the content of the {{microAppName}}.</p>
+    </React.Fragment>
+  );
+};
+
+export default {{formatString appNameWS}};

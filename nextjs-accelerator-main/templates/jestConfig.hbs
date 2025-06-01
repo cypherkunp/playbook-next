@@ -1,0 +1,13 @@
+module.exports = {
+    testEnvironment: "jsdom",
+    coverageDirectory: "<rootDir>/apps/testCoverage/coverage",
+    moduleNameMapper: {
+        "\\.(css|less)$": "<rootDir>/babel.config.cjs",
+        "^{{formatString microAppName}}/counterStore$": "<rootDir>/apps/{{microAppName}}/src/store/counterStore.ts"
+    },
+    collectCoverage: true,
+        coveragePathIgnorePatterns: [
+        "babel.config.cjs",
+        "node_modules"
+    ]
+}

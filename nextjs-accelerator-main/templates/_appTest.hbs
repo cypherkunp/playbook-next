@@ -1,0 +1,21 @@
+import React from 'react';
+import { render } from "@testing-library/react";
+import MyApp from '../pages/_app';
+
+describe('MyApp', () => {
+    const MyComponent = () => {
+        return <div>Mock</div>
+    };
+
+    it('should render the App component properly', () => {
+        const props = {}
+        const appProps = {
+            Component: MyComponent,
+            pageProps: props
+        }
+        const { getByRole } = render(<MyApp {...appProps} />)
+
+        expect(getByRole).toBeTruthy();
+    });
+
+});

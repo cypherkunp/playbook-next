@@ -1,0 +1,13 @@
+// Micro App Template
+import React from 'react';
+import Link from 'next/link'
+
+export default function {{name}}() {
+  return (
+    <main className="remote-app-main">
+      <h1>This is the remote app - {{name}}</h1>
+      <p>This is the content of {{name}}.</p>
+      <Link href="/">Go back to container (host application)</Link>
+    </main>
+  );
+}

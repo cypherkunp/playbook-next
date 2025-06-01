@@ -1,0 +1,50 @@
+import React from "react";
+import NextDocument, { Html, Head, Main, NextScript } from "next/document";
+import type { DocumentContext, DocumentInitialProps } from "next/document";
+import { revalidate } from "@module-federation/nextjs-mf/utils";
+
+export default function Document() {
+  return (
+    <Html lang="en">
+      <Head>
+        <meta charSet="UTF-8" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+        />
+      </Head>
+      <body>
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  );
+}
+Document.getInitialProps = async (
+  ctx: DocumentContext
+): Promise<DocumentInitialProps> => {
+  const initialProps = await NextDocument.getInitialProps(ctx);
+  if (
+    process.env.NODE_ENV === "development" &&
+    !ctx.req?.url?.includes("_next")
+  ) {
+    await revalidate().then((shouldReload) => {
+      if (shouldReload) {
+        ctx.res?.writeHead(302, { Location: ctx.req?.url });
+        ctx.res?.end();
+      }
+    });
+  } else {
+    ctx.res?.on("finish", () => {
+      revalidate();
+    });
+  }
+
+  return { ...initialProps };
+};

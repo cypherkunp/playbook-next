@@ -1,0 +1,21 @@
+import React from 'react';
+import { render, renderHook, act } from "@testing-library/react";
+import {{updatedAppName}} from '../pages/index';
+import useCounterStore from "{{formatString microAppName}}/counterStore";
+
+describe("Remote component", () => {
+    it('should render the Remote component properly', () => {
+        const { getByRole } = render(<{{updatedAppName}} />);
+        const { result } = renderHook(() => useCounterStore());
+        const { increment } = result.current;
+
+        act(()=>{
+            increment()
+        });
+
+        expect(getByRole).toBeTruthy();
+        expect(result.current.count)?.toEqual(1);
+    });
+
+});
+

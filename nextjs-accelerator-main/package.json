@@ -1,0 +1,33 @@
+{
+    "name": "@genesisx/nextjs-mfe",
+    "version": "4.3.3",
+    "description": "GenesisX generator for NextJs based module federated apps using turbo, run npx @genesisx/nextjs-mfe",
+    "type": "module",
+    "license": "PublicisSapient Internal , see LICENSE file",
+    "keywords": [
+        "nextjs",
+        "module-federation",
+        "zustand",
+        "genesisx"
+    ],
+    "main": "index.js",
+    "bin": {
+        "nextjs-mfe": "./index.js"
+    },
+    "scripts": {
+        "@genesisx/nextjs-mfe": "plop",
+        "build": "node build.js && cp package.json readme.md dist/"
+    },
+    "preferGlobal": true,
+    "dependencies": {
+        "child_process": "^1.0.2",
+        "plop": "^3.0.0",
+        "shelljs": "^0.8.5",
+        "util.promisify": "^1.1.2"
+    },
+    "devDependencies": {
+        "handlebars": "^4.7.8",
+        "terser": "^5.19.4",
+        "uglify-js": "^3.17.4"
+    }
+}

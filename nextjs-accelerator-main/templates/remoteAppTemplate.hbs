@@ -1,0 +1,17 @@
+import dynamic from 'next/dynamic';
+import Link from 'next/link'
+import React, { Suspense } from "react";
+
+
+
+
+ const {{formatString microAppTitle}} = dynamic(
+  () => import("{{formatString microAppTitle}}/page"),
+  {
+    suspense: true,
+    ssr: true,
+  }
+); 
+
+
+export default {{formatString microAppTitle}};

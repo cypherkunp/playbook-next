@@ -1,0 +1,5 @@
+  {{#if microAppNames}}
+    {{#each (split microAppNames ',')}}
+    {{formatString this}}: `{{this}}@http://localhost:{{calculatePort @index}}/_next/static/${location}/remoteEntry.js`,
+    {{/each}}
+    {{/if}}
